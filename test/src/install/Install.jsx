@@ -8,18 +8,6 @@ const softwareList = [
   { name: "CSPP Microwave Retrieval Software" },
   { name: "CSPP Utility Software" },
   { name: "CSPP Legacy Software - No Support Provided" },
-  { name: "CSPP Sensor Data Record (SDR) Software" },
-  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software" },
-  { name: "CSPP Infrared Sounder Retrieval Software" },
-  { name: "CSPP Microwave Retrieval Software" },
-  { name: "CSPP Utility Software" },
-  { name: "CSPP Legacy Software - No Support Provided" },
-  { name: "CSPP Sensor Data Record (SDR) Software" },
-  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software" },
-  { name: "CSPP Infrared Sounder Retrieval Software" },
-  { name: "CSPP Microwave Retrieval Software" },
-  { name: "CSPP Utility Software" },
-  { name: "CSPP Legacy Software - No Support Provided" },
 ];
 
 function Install() {
