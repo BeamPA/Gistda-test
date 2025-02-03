@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const softwareList = [
-  { name: "CSPP Sensor Data Record (SDR) Software" },
-  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software" },
-  { name: "CSPP Infrared Sounder Retrieval Software" },
-  { name: "CSPP Microwave Retrieval Software" },
-  { name: "CSPP Utility Software" },
-  { name: "CSPP Legacy Software - No Support Provided" },
+  { name: "CSPP Sensor Data Record (SDR) Software", path: "/CSPP Sensor Data Record (SDR) Software" },
+  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software", path: "/CSPP Image Environmental Data Record (EDR) Retrieval Software" },
+  { name: "CSPP Infrared Sounder Retrieval Software", path: "/CSPP Infrared Sounder Retrieval Software" },
+  { name: "CSPP Microwave Retrieval Software", path: "/CSPP Microwave Retrieval Software" },
+  { name: "CSPP Utility Software", path: "/CSPP Utility Software" },
+  { name: "CSPP Legacy Software - No Support Provided", path: "/CSPP Legacy Software - No Support Provided" },
 ];
 
 function Install() {
@@ -38,7 +38,7 @@ function Install() {
           {filteredSoftware.length > 0 ? (
             <div className="space-y-3">
               {filteredSoftware.map((software) => (
-                <Link key={software.name} to={`/${encodeURIComponent(software.name)}`}>
+                <Link key={software.name} to={software.path}>
                   <button className="w-full p-4 text-left bg-[#EDEDED] rounded-md shadow-md hover:shadow-lg transition duration-200 mb-3">
                     {software.name}
                   </button>

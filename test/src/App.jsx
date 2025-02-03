@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SNPPMain from "./main/Main";
 import Install from "./install/Install";
-import Login from "./login/Login";
+import SDR from "./install/sdr"
+import EDR from "./install/edr"
 import Result from "./result/Result";
 import Sidebar from "./sidebar/sidebar";
-import SNPPSoftware from "./install/SNPPSoftware";
+
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
           <Routes>
             <Route path="/" element={<SNPPMain />} />
             <Route path="/install" element={<Install />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/CSPP Sensor Data Record (SDR) Software" element={<SDR />} />
+            <Route path="/CSPP Image Environmental Data Record (EDR) Retrieval Software" element={<EDR />} />
             <Route path="/result" element={<Result />} />
-            <Route path="/:softwareName" element={<SNPPSoftware />} /> {/* รองรับชื่อเต็ม */}
+          
           </Routes>
         </div>
       </div>

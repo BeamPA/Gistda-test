@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react"; */
 
 function SNPPSoftware() {
   const { softwareName } = useParams();
@@ -108,24 +108,10 @@ function SNPPSoftware() {
 
   const software = softwareDetails[decodedSoftwareName];
 
-  // ฟังก์ชันดึงขนาดไฟล์จาก URL
-  const getFileSize = async (url) => {
-    try {
-      const response = await fetch(url, { method: "HEAD" });
-      const contentLength = response.headers.get("Content-Length");
-      if (contentLength) {
-        return (contentLength / (1024 * 1024)).toFixed(2) + " MB";
-      } else {
-        return "Unknown";
-      }
-    } catch (error) {
-      console.error("Error fetching file size:", error);
-      return "Failed";
-    }
-  };
+  
 
   // ใช้ useState เพื่อเก็บข้อมูลขนาดไฟล์
-  const [fileSizes, setFileSizes] = useState({});
+  /* const [fileSizes, setFileSizes] = useState({});
 
   useEffect(() => {
     const fetchSizes = async () => {
@@ -144,7 +130,7 @@ function SNPPSoftware() {
     };
 
     fetchSizes();
-  }, [software]);
+  }, [software]); */
 
   return (
     <div className="max-h-screen flex flex-col items-center justify-center p-6">
@@ -191,11 +177,11 @@ function SNPPSoftware() {
                             {file.filename.split("/").pop()}
                           </a>
                         </td>
-                        <td className="py-2 px-4">
+                        {/* <td className="py-2 px-4">
                           {file.size ||
                             fileSizes[file.filename] ||
                             "Loading..."}
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>
