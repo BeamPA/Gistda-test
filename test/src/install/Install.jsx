@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const softwareList = [
-  { name: "CSPP Sensor Data Record (SDR) Software", path: "/CSPP Sensor Data Record (SDR) Software" },
-  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software", path: "/CSPP Image Environmental Data Record (EDR) Retrieval Software" },
+  { name: "CSPP Sensor Data Record (SDR) Software", path: "/SDR" },
+  { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software", path: "/EDR" },
   { name: "CSPP Infrared Sounder Retrieval Software", path: "/CSPP Infrared Sounder Retrieval Software" },
   { name: "CSPP Microwave Retrieval Software", path: "/CSPP Microwave Retrieval Software" },
   { name: "CSPP Utility Software", path: "/CSPP Utility Software" },
