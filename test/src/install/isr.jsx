@@ -1,78 +1,66 @@
 import { useState } from "react";
 
-const sdrData = [
+const isrData = [
   {
-    title:
-      "VIIRS, ATMS, CrIS and OMPS SDR Version 4.1 Software  4 December 2024",
+    title: "CSPP HEAP NUCAPS CrIS/ATMS IASI/AMSUA/MHS Retrieval Package Version 2.0  11 January 2022",
     files: [
       {
-        name: "CSPP SDR V4.1 Installation and Run Instructions",
+        name: "HEAP NUCAPS V2.0 EDR Software Installation Instructions",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_Installation_Guide_v4.1.pdf",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/HEAP/v2.0/CSPP_HEAP_Installation_Guide_v2.0.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Software for Linux",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J02 Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j02.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J01 Instrument Starter LUTs",
+        name: "HEAP NUCAPS V2.0 EDR Retrieval Software for Linux",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j01.tar.gz",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/HEAP/v2.0/CSPP_HEAP_V2.0.tar",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 SNPP Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_npp.tar.gz",
-        size: "",
+        name: "HEAP NUCAPS V2.0 EDR Retrieval Test Data",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/HEAP/v2.0/CSPP_HEAP_TESTDATA_V2.0.tar.gz",
+        size: "5.3 MB",
+      },
+    ],
+  },
+  {
+    title: "CSPP UW Hyperspectral Retrieval Package Version 2.0 22 June 2018",
+    files: [
+      {
+        name: "CrIS, AIRS and IASI Wisconsin Dual Regression Retrieval Software Installation Instructions",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/CrIS/EDR/hsrtv/v2.0/CSPP_HSRTV_Installation_Guide_v2.0a.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J02 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j02.tar.gz",
-        size: "",
+        name: "CrIS, AIRS and IASI EDR Dual Regression Retrieval Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/CrIS/EDR/hsrtv/v2.0/CSPP_UW_HSRTV_V2.0.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J01 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j01.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 SNPP DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_npp.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 Static Tiles",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_tiles.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 Verification Test Files",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_TEST_DATA.tar.gz",
-        size: "",
+        name: "CrIS, AIRS and IASI EDR Dual Regression Coefficient Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/CrIS/EDR/hsrtv/v2.0/CSPP_UW_HSRTV_V2.0_COEFFS.tar.gz",
+        size: "5.3 MB",
       },
     ],
   },
 ];
 
-function SDR() {
+function ISR() {
   const [loading, setLoading] = useState(false);
   const [tableLoading, setTableLoading] = useState(null);
   const [progress, setProgress] = useState({});
   const [installed, setInstalled] = useState({});
 
-  const allInstalled = Object.values(installed).length === sdrData.length && Object.values(installed).every((val) => val);
+  const allInstalled = Object.values(installed).length === isrData.length && Object.values(installed).every((val) => val);
 
   const handleInstall = (tableIndex = null, uninstall = false) => {
     if (tableIndex === null) {
       setLoading(true);
-      const toInstall = sdrData.reduce((acc, _, index) => {
+      const toInstall = isrData.reduce((acc, _, index) => {
         if (!installed[index]) acc.push(index);
         return acc;
       }, []);
@@ -134,9 +122,8 @@ function SDR() {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold"> 
-        CSPP Sensor Data Record (SDR) Software</h1>
-        {sdrData.length > 1 && (
+        <h1 className="text-xl font-bold"> CSPP Infrared Sounder Retrieval Software</h1>
+        {isrData.length > 1 && (
           <button
           className={`px-6 py-2 rounded flex items-center gap-2 ${
             loading
@@ -153,7 +140,7 @@ function SDR() {
         )}
       </div>
       <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[900px] overflow-y-auto">
-        {sdrData.map((table, tableIndex) => (
+        {isrData.map((table, tableIndex) => (
           <div key={tableIndex} className="mb-6 border rounded-lg overflow-hidden">
             <table className="min-w-full table-fixed">
               <thead className="bg-[#0E3B61] text-white">
@@ -200,5 +187,4 @@ function SDR() {
   );
 }
 
-
-export default SDR;
+export default ISR;

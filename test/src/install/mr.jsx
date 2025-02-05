@@ -1,78 +1,102 @@
 import { useState } from "react";
 
-const sdrData = [
+const mrData = [
   {
-    title:
-      "VIIRS, ATMS, CrIS and OMPS SDR Version 4.1 Software  4 December 2024",
+    title: "CSPP MiRS Microwave Retrieval Software Version 4.0  19 January 2024",
     files: [
       {
-        name: "CSPP SDR V4.1 Installation and Run Instructions",
+        name: "MiRS Retrieval Software Installation Instructions",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_Installation_Guide_v4.1.pdf",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/MIRS/v4.0/CSPP_MIRS_Installation_Guide_v4.0a.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Software for Linux",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J02 Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j02.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J01 Instrument Starter LUTs",
+        name: "MIRS Retrieval Software for Linux",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j01.tar.gz",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/MIRS/v4.0/CSPP_MIRS_V4.0.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 SNPP Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_npp.tar.gz",
-        size: "",
+        name: "MIRS Retrieval Test Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/MIRS/v4.0/CSPP_MIRS_TESTDATA_V4.0.tar.gz",
+        size: "5.3 MB",
+      },
+    ],
+  },
+  {
+    title: "CSPP GCOMW-1 AMSR-2 GAASP Software Version 1.0.2    9 May 2023",
+    files: [
+      {
+        name: "GAASP Retrieval Software Installation Instructions",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/GAASP/v1.0.2/CSPP_GAASP_Installation_Guide_v1.0.2.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J02 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j02.tar.gz",
-        size: "",
+        name: "GAASP Retrieval Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/GAASP/v1.0/cspp-gaasp-1.0.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J01 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j01.tar.gz",
-        size: "",
+        name: "GAASP Retrieval Software Patch 1",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/GAASP/v1.0.1/cspp-gaasp-1.0.1_patch.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 SNPP DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_npp.tar.gz",
-        size: "",
+        name: "GAASP Retrieval Software Patch 2",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/GAASP/v1.0.2/cspp-gaasp-1.0.2_patch.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Static Tiles",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_tiles.tar.gz",
-        size: "",
+        name: "GAASP Test Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/GAASP/v1.0/cspp-gaasp-test_data-1.0.tar.gz",
+        size: "5.3 MB",
+      },
+    ],
+  },
+  {
+    title:
+      "CSPP IAPP Software Version 1.1 3 March 2017",
+    files: [
+      {
+        name: "IAPP Retrieval Software Installation Instructions",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/IAPP/v1.1/CSPP_IAPP_Installation_Guide_v1.1.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Verification Test Files",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_TEST_DATA.tar.gz",
-        size: "",
+        name: "IAPP Retrieval Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/IAPP/v1.1/CSPP_IAPP_v1.1.tar.gz",
+        size: "5.3 MB",
+      },
+      {
+        name: "IAPP Retrieval Test Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/IAPP/v1.1/CSPP_IAPP_v1.1_TEST_DATA.tar.gz",
+        size: "5.3 MB",
       },
     ],
   },
 ];
 
-function SDR() {
+function MR() {
   const [loading, setLoading] = useState(false);
   const [tableLoading, setTableLoading] = useState(null);
   const [progress, setProgress] = useState({});
   const [installed, setInstalled] = useState({});
 
-  const allInstalled = Object.values(installed).length === sdrData.length && Object.values(installed).every((val) => val);
+  const allInstalled = Object.values(installed).length === mrData.length && Object.values(installed).every((val) => val);
 
   const handleInstall = (tableIndex = null, uninstall = false) => {
     if (tableIndex === null) {
       setLoading(true);
-      const toInstall = sdrData.reduce((acc, _, index) => {
+      const toInstall = mrData.reduce((acc, _, index) => {
         if (!installed[index]) acc.push(index);
         return acc;
       }, []);
@@ -134,9 +158,8 @@ function SDR() {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold"> 
-        CSPP Sensor Data Record (SDR) Software</h1>
-        {sdrData.length > 1 && (
+        <h1 className="text-xl font-bold"> CSPP Microwave Retrieval Software</h1>
+        {mrData.length > 1 && (
           <button
           className={`px-6 py-2 rounded flex items-center gap-2 ${
             loading
@@ -153,7 +176,7 @@ function SDR() {
         )}
       </div>
       <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[900px] overflow-y-auto">
-        {sdrData.map((table, tableIndex) => (
+        {mrData.map((table, tableIndex) => (
           <div key={tableIndex} className="mb-6 border rounded-lg overflow-hidden">
             <table className="min-w-full table-fixed">
               <thead className="bg-[#0E3B61] text-white">
@@ -200,5 +223,4 @@ function SDR() {
   );
 }
 
-
-export default SDR;
+export default MR;

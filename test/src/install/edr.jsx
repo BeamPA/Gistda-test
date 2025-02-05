@@ -158,91 +158,95 @@ function EDR() {
   const [loading, setLoading] = useState(false);
   const [tableLoading, setTableLoading] = useState(null);
   const [progress, setProgress] = useState({});
-  const [installAll, setInstallAll] = useState(false);
+  const [installed, setInstalled] = useState({});
 
-  const handleInstall = (tableIndex = null) => {
+  const allInstalled = Object.values(installed).length === edrData.length && Object.values(installed).every((val) => val);
+
+  const handleInstall = (tableIndex = null, uninstall = false) => {
     if (tableIndex === null) {
-      setInstallAll(true);
       setLoading(true);
-      const initialProgress = edrData.reduce((acc, _, index) => {
-        acc[index] = 0; // Initialize progress for all tables
+      const toInstall = edrData.reduce((acc, _, index) => {
+        if (!installed[index]) acc.push(index);
+        return acc;
+      }, []);
+
+      if (toInstall.length === 0) {
+        uninstall = true;
+        toInstall.push(...Object.keys(installed).map(Number));
+      }
+
+      const initialProgress = toInstall.reduce((acc, index) => {
+        acc[index] = 0;
         return acc;
       }, {});
       setProgress(initialProgress);
-    } else {
-      setTableLoading(tableIndex);
-      setProgress((prevProgress) => ({
-        ...prevProgress,
-        [tableIndex]: 0,
-      }));
-    }
 
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        let allDone = true;
-        const newProgress = { ...prevProgress };
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          let allDone = true;
+          const newProgress = { ...prev };
 
-        if (tableIndex === null) {
-          // Update all tables
-          edrData.forEach((_, index) => {
+          toInstall.forEach((index) => {
             if (newProgress[index] < 100) {
               newProgress[index] += 10;
               allDone = false;
             }
           });
-        } else {
-          // Update specific table
-          if (newProgress[tableIndex] < 100) {
-            newProgress[tableIndex] += 10;
-            allDone = false;
+
+          if (allDone) {
+            clearInterval(interval);
+            setLoading(false);
+            setInstalled((prev) => {
+              const updated = { ...prev };
+              toInstall.forEach((index) => {
+                updated[index] = !uninstall;
+              });
+              return updated;
+            });
           }
-        }
-
-        if (allDone) {
-          clearInterval(interval);
-          setLoading(false);
-          setInstallAll(false); // Reset Install All after complete
-        }
-
-        return newProgress;
-      });
-    }, 300); // Adjust interval timing to speed up or slow down the progress
-
-    setTimeout(() => {
-      setTableLoading(null); // Reset table loading status after installation
-    }, 3000); // Simulate installation time
+          return newProgress;
+        });
+      }, 300);
+    } else {
+      setTableLoading(tableIndex);
+      setProgress((prev) => ({ ...prev, [tableIndex]: 0 }));
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev[tableIndex] >= 100) {
+            clearInterval(interval);
+            setTableLoading(null);
+            setInstalled((prev) => ({ ...prev, [tableIndex]: !uninstall }));
+            return prev;
+          }
+          return { ...prev, [tableIndex]: prev[tableIndex] + 10 };
+        });
+      }, 300);
+    }
   };
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold">
-          CSPP Image Environmental Data Record (EDR) Retrieval Software
-        </h1>
-        <button
-          className={`bg-green-500 text-white px-6 py-2 rounded flex items-center gap-2 ${
-            loading || installAll ? "cursor-not-allowed opacity-70" : ""
-          }`}
-          onClick={() => handleInstall()}
-          disabled={loading || installAll}
+        <h1 className="text-xl font-bold"> CSPP Imager Environmental Data Record (EDR) Retrieval Software</h1>
+        {edrData.length > 1 && (
+          <button
+          className={`px-6 py-2 rounded flex items-center gap-2 ${
+            loading
+              ? "bg-gray-500 cursor-not-allowed"
+              : allInstalled
+              ? "bg-red-500" // สีแดงเมื่อเป็น "Uninstall All"
+              : "bg-green-500" // สีเขียวเมื่อเป็น "Install All"
+          } text-white`}
+          onClick={() => handleInstall(null, allInstalled)}
+          disabled={loading}
         >
-          {loading || installAll ? (
-            <>
-              <span className="loading loading-spinner loading-sm"></span>
-              Installing...
-            </>
-          ) : (
-            "Install all"
-          )}
+          {loading ? (allInstalled ? "Uninstalling..." : "Installing...") : allInstalled ? "Uninstall all" : "Install all"}
         </button>
+        )}
       </div>
-
       <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[900px] overflow-y-auto">
         {edrData.map((table, tableIndex) => (
-          <div
-            key={tableIndex}
-            className="mb-6 border rounded-lg overflow-hidden"
-          >
+          <div key={tableIndex} className="mb-6 border rounded-lg overflow-hidden">
             <table className="min-w-full table-fixed">
               <thead className="bg-[#0E3B61] text-white">
                 <tr>
@@ -256,12 +260,7 @@ function EDR() {
                   <tr key={index} className="border-b">
                     <td className="px-4 py-2">{file.name}</td>
                     <td className="px-4 py-2">
-                      <a
-                        href={file.filename}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 underline"
-                      >
+                      <a href={file.filename} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                         {file.filename.split("/").pop()}
                       </a>
                     </td>
@@ -270,37 +269,20 @@ function EDR() {
                 ))}
               </tbody>
             </table>
-
-            {/* Install Button and Progress Bar at the bottom of the table */}
             <div className="px-4 py-4 flex justify-between items-center">
               <div className="w-1/3">
-                {progress[tableIndex] !== undefined &&
-                  progress[tableIndex] < 100 && (
-                    <div className="h-2 bg-gray-300 rounded-full">
-                      <div
-                        className="h-full bg-green-500 rounded-full"
-                        style={{ width: `${progress[tableIndex]}%` }}
-                      ></div>
-                    </div>
-                  )}
+                {progress[tableIndex] !== undefined && progress[tableIndex] < 100 && (
+                  <div className="h-2 bg-gray-300 rounded-full">
+                    <div className="h-full bg-green-500 rounded-full" style={{ width: `${progress[tableIndex]}%` }}></div>
+                  </div>
+                )}
               </div>
               <button
-                className={`bg-blue-500 text-white px-4 py-2 rounded ${
-                  tableLoading === tableIndex || installAll
-                    ? "cursor-not-allowed opacity-70"
-                    : ""
-                }`}
-                onClick={() => handleInstall(tableIndex)}
-                disabled={tableLoading === tableIndex || installAll}
+                className={`px-4 py-2 rounded text-white ${tableLoading === tableIndex ? "bg-gray-500 cursor-not-allowed" : installed[tableIndex] ? "bg-red-500" : "bg-blue-500"}`}
+                onClick={() => handleInstall(tableIndex, installed[tableIndex])}
+                disabled={tableLoading === tableIndex}
               >
-                {tableLoading === tableIndex || installAll ? (
-                  <>
-                    <span className="loading loading-spinner loading-sm"></span>
-                    Installing...
-                  </>
-                ) : (
-                  "Install"
-                )}
+                {tableLoading === tableIndex ? (installed[tableIndex] ? "Uninstalling..." : "Installing...") : installed[tableIndex] ? "Uninstall" : "Install"}
               </button>
             </div>
           </div>

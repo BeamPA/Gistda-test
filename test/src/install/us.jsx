@@ -1,78 +1,121 @@
 import { useState } from "react";
 
-const sdrData = [
+const usData = [
   {
     title:
-      "VIIRS, ATMS, CrIS and OMPS SDR Version 4.1 Software  4 December 2024",
+      "Real-time Software Telemetry Processing System (RT-STPS) Version 7.0 with Patch 1  22 May 2024",
     files: [
       {
-        name: "CSPP SDR V4.1 Installation and Run Instructions",
+        name: "RT-STPS Version 7.0 Users' Guide",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_Installation_Guide_v4.1.pdf",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0_patch1/RT-STPS_7.0_Users_Guide.pdf",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Software for Linux",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J02 Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j02.tar.gz",
-        size: "",
-      },
-      {
-        name: "CSPP SDR V4.1 J01 Instrument Starter LUTs",
+        name: "CSPP RT-STPS Addendum",
         filename:
-          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_j01.tar.gz",
-        size: "",
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0_patch1/RT-STPS_7.0_Patch_Addendum.txt",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 SNPP Instrument Starter LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_luts_npp.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Patch 1 Readme File",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0_patch1/RT-STPS_7.0_PATCH_1_README.txt",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J02 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j02.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0/RT-STPS_7.0.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 J01 DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_j01.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Test Data",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0/RT-STPS_7.0_testdata.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 SNPP DNB Stray Light LUTs",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_straylight_luts_npp.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Patch 1 for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0_patch1/RT-STPS_7.0_PATCH_1.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Static Tiles",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_static_tiles.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Patch 1 Test Data",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0_patch1/RT-STPS_7.0_PATCH_1_testdata.tar.gz",
+        size: "5.3 MB",
       },
       {
-        name: "CSPP SDR V4.1 Verification Test Files",
-        filename: "https://bin.ssec.wisc.edu/pub/CSPP/hidden/SDR/v4.1/CSPP_SDR_V4.1_TEST_DATA.tar.gz",
-        size: "",
+        name: "RT-STPS Version 7.0 Source Code (not required)",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/RT-STPS/v7.0/RT-STPS_7.0_SOURCE_CODE.tar.gz",
+        size: "5.3 MB",
+      },
+    ],
+  },
+  {
+    title: "CSPP Sounder QuickLook (QL) Software for HEAP NUCAPS, HSRTV, MIRS and IAPP Retrievals 1 March 2024",
+    files: [
+      {
+        name: "Sounder Quicklook Software Installation Instructions",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/QL/v1.3/CSPP_Sounder_QL_Installation_Guide_v1.3.pdf",
+        size: "5.3 MB",
+      },
+      {
+        name: "Sounder Quicklook Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/QL/v1.3/cspp-sounder-ql-1.3.tar.gzhttps://bin.ssec.wisc.edu/pub/CSPP/hidden/QL/v1.3/cspp-sounder-ql-1.3.tar.gz",
+        size: "5.3 MB",
+      },
+      {
+        name: "Sounder Quicklook Test Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/P2G/v3.1/Polar2Grid_Documentation_3.1.pdf",
+        size: "5.3 MB",
+      },
+    ],
+  },
+  {
+    title:
+      "Polar2Grid Reprojection Software for VIIRS, MODIS, AVHRR and Science Products 20 August 2024",
+    files: [
+      {
+        name: "Polar2Grid V3.1 Reprojection Software Installation Instructions",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/LSR/v1.1/CSPP_LSR_Installation_Guide_v1.1a.pdf",
+        size: "5.3 MB",
+      },
+      {
+        name: "VIIRS Surface Reflectance 1.1 Software for Linux",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/P2G/v3.1/Polar2Grid_Documentation_3.1.pdf",
+        size: "5.3 MB",
+      },
+      {
+        name: "Polar2Grid V3.1 Reprojection Software Test Files",
+        filename:
+          "https://bin.ssec.wisc.edu/pub/CSPP/hidden/P2G/v3.1/CSPP_POLAR2GRID_V3.1_TEST_DATA.tar.gz",
+        size: "5.3 MB",
       },
     ],
   },
 ];
 
-function SDR() {
+function US() {
   const [loading, setLoading] = useState(false);
   const [tableLoading, setTableLoading] = useState(null);
   const [progress, setProgress] = useState({});
   const [installed, setInstalled] = useState({});
 
-  const allInstalled = Object.values(installed).length === sdrData.length && Object.values(installed).every((val) => val);
+  const allInstalled = Object.values(installed).length === usData.length && Object.values(installed).every((val) => val);
 
   const handleInstall = (tableIndex = null, uninstall = false) => {
     if (tableIndex === null) {
       setLoading(true);
-      const toInstall = sdrData.reduce((acc, _, index) => {
+      const toInstall = usData.reduce((acc, _, index) => {
         if (!installed[index]) acc.push(index);
         return acc;
       }, []);
@@ -134,9 +177,8 @@ function SDR() {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center">
-        <h1 className="text-xl font-bold"> 
-        CSPP Sensor Data Record (SDR) Software</h1>
-        {sdrData.length > 1 && (
+        <h1 className="text-xl font-bold">CSPP Utility Software</h1>
+        {usData.length > 1 && (
           <button
           className={`px-6 py-2 rounded flex items-center gap-2 ${
             loading
@@ -153,7 +195,7 @@ function SDR() {
         )}
       </div>
       <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[900px] overflow-y-auto">
-        {sdrData.map((table, tableIndex) => (
+        {usData.map((table, tableIndex) => (
           <div key={tableIndex} className="mb-6 border rounded-lg overflow-hidden">
             <table className="min-w-full table-fixed">
               <thead className="bg-[#0E3B61] text-white">
@@ -201,4 +243,4 @@ function SDR() {
 }
 
 
-export default SDR;
+export default US;

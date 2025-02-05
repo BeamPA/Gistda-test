@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const softwareList = [
   { name: "CSPP Sensor Data Record (SDR) Software", path: "/SDR" },
   { name: "CSPP Image Environmental Data Record (EDR) Retrieval Software", path: "/EDR" },
-  { name: "CSPP Infrared Sounder Retrieval Software", path: "/CSPP Infrared Sounder Retrieval Software" },
-  { name: "CSPP Microwave Retrieval Software", path: "/CSPP Microwave Retrieval Software" },
-  { name: "CSPP Utility Software", path: "/CSPP Utility Software" },
-  { name: "CSPP Legacy Software - No Support Provided", path: "/CSPP Legacy Software - No Support Provided" },
+  { name: "CSPP Infrared Sounder Retrieval Software", path: "/ISR" },
+  { name: "CSPP Microwave Retrieval Software", path: "/MR" },
+  { name: "CSPP Utility Software", path: "/US" },
+  { name: "CSPP Legacy Software - No Support Provided", path: "/LS" },
 ];
 
 function Install() {
