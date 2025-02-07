@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from 'axios';
 
 const lsData = [
   {
@@ -74,7 +75,18 @@ function LS() {
               });
               return updated;
             });
-          }
+          // ส่งข้อมูลการติดตั้งเสร็จสมบูรณ์ไปยัง backend
+          axios.post('/api/update-software-status', {
+            categories: toInstall.map((index) => lsData[index].title), // ส่งชื่อซอฟต์แวร์ที่ติดตั้งเสร็จ
+            status: 1, // สถานะเป็น 1 หมายถึงการติดตั้งเสร็จ
+          })
+          .then(response => {
+            console.log('Software installation status updated:', response.data);
+          })
+          .catch(error => {
+            console.error('Error updating installation status:', error);
+          });
+        }
           return newProgress;
         });
       }, 300);
@@ -115,7 +127,7 @@ function LS() {
         </button>
         )}
       </div>
-      <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[900px] overflow-y-auto">
+      <div className="mt-6 bg-white shadow-lg rounded-lg p-4 max-h-[800px] overflow-y-auto">
         {lsData.map((table, tableIndex) => (
           <div key={tableIndex} className="mb-6 border rounded-lg overflow-hidden">
             <table className="min-w-full table-fixed">
